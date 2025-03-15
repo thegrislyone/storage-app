@@ -1,15 +1,13 @@
-<script setup>
-
-
+<script lang="ts" setup>
 
 </script>
 
 <template>
-    <main class="page-index">
+<main class="page-index">
 
-        index page
+    index page
 
-    </main>
+</main>
 </template>
 
 <style lang="scss">

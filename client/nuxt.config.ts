@@ -7,6 +7,10 @@ export default defineNuxtConfig({
 			allowedHosts: ['storage-app.local']
 		}
 	},
+	typescript: {
+		typeCheck: true,
+		strict: true
+	},	
 	css: [
 		'~/assets/scss/reset.scss',
 	]
