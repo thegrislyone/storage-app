@@ -18,11 +18,10 @@ use App\Http\Controllers\AuthController;
 */
 
 Route::post('/upload', [UploadController::class, 'uploadFiles']);
-Route::get('/', function () {
-    return "api";
-});
 
 /* auth */
 
 Route::post('/auth/login', [AuthController::class, 'login']);
-Route::post('/auth/register', [AuthController::class, 'register']);
+Route::get('/auth/logout', [AuthController::class, 'logout']);
+Route::post('/auth/registration', [AuthController::class, 'registration']);
+Route::get('/auth/check', [AuthController::class, 'check']);

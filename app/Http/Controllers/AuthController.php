@@ -11,7 +11,44 @@ use App\Models\User;
 
 class AuthController extends Controller
 {
-    
+
+    public function registration(Request $request) {
+
+        try {
+
+            $credentials = $request->validate([
+                'name' => ['required'],
+                'email' => ['required', 'email'],
+                'password' => ['required'],
+            ]);
+
+            $user = User::create([
+                "name" => "dolbayob",
+                "email" => $credentials['email'],
+                "password" => Hash::make($credentials['password'])
+            ]);
+
+            Auth::login($user, true);
+
+            $request->session()->regenerate();
+
+            return response()->json([
+                "success" => true,
+                "errors" => [],
+                "user" => Auth::user()
+            ], 200);
+
+        } catch(Exception $e) {
+
+            return response()->json([
+                "success" => false,
+                "errors" => ["Ошибка регистрации."]
+            ], 400);
+
+        }
+
+    }
+
     public function login(Request $request) {
 
         $credentials = $request->validate([
@@ -19,45 +56,54 @@ class AuthController extends Controller
             'password' => ['required'],
         ]);
 
-        // return ["email" => $request['email'], "password" => $request['password'], "users" => User::get()];
-
         if (Auth::attempt($credentials, true)) {
 
             $request->session()->regenerate();
 
-            return "заебись";
+            return response()->json([
+                "success" => true,
+                "errors" => [],
+                "user" => Auth::user()
+            ], 200);
 
         } else {
 
-            return response()->json(['error' => true], 400);
+            return response()->json([
+                "success" => false,
+                "errors" => ["Пароль или логин неверный."]
+            ], 400);
 
         }
-        
+
     }
 
-    public function register(Request $request) {
-        
+    public function logout(Request $request) {
+
         try {
 
-            $credentials = $request->validate([
-                'email' => ['required', 'email'],
-                'password' => ['required'],
-            ]);
+            Auth::logout();
 
-            User::create([
-                "name" => "dolbayob",
-                "email" => $credentials['email'],
-                "password" => Hash::make($credentials['password'])
-            ]);
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
 
-            return response()->json(["success_suka" => true], 200);
+            return response()->json([
+                "success" => true,
+                "errors" => []
+            ]);
 
         } catch(Exception $e) {
 
-            return response()->json(["error" => true], 400);
+            return response()->json([
+                "success" => false,
+                "errors" => ["Ошибка логаута."]
+            ]);
 
         }
 
+    }
+
+    public function check(Request $request) {
+        return Auth::check();
     }
 
 }

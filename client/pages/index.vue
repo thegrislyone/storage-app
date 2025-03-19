@@ -1,13 +1,13 @@
 <script setup lang="ts">
 
-import Authorization from '~/components/Authorization.vue';
+
 
 </script>
 
 <template>
 <main class="page-index">
 
-    <Authorization/>
+    index page
 
 </main>
 </template>
