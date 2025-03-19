@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\UploadController;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +18,11 @@ use App\Http\Controllers\UploadController;
 */
 
 Route::post('/upload', [UploadController::class, 'uploadFiles']);
+Route::get('/', function () {
+    return "api";
+});
+
+/* auth */
+
+Route::post('/auth/login', [AuthController::class, 'login']);
+Route::post('/auth/register', [AuthController::class, 'register']);

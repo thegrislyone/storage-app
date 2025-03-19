@@ -5,7 +5,17 @@ export default defineNuxtConfig({
 	vite: {
 		server: {
 			allowedHosts: ['storage-app.local']
-		}
+		},
+		css: {
+            preprocessorOptions: {
+                scss: {
+                    additionalData: `
+                        @use "@/assets/scss/variables.scss" as *;
+                        @use "@/assets/scss/mixins.scss" as *;
+                    `
+                }
+            }
+        }
 	},
 	typescript: {
 		typeCheck: true,
@@ -13,5 +23,7 @@ export default defineNuxtConfig({
 	},	
 	css: [
 		'~/assets/scss/reset.scss',
+		'~/assets/scss/base.scss',
+		'~/assets/scss/fonts.scss'
 	]
 })
