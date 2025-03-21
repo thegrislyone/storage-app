@@ -1,0 +1,48 @@
+
+// Transition
+$transition-timing: cubic-bezier(0.215, 0.61, 0.355, 1);
+@mixin transition($property: all, $duration: 0.2s, $timing: $transition-timing) {
+	transition: $property $duration $timing;
+}
+
+// Centrize block
+@mixin center($position) {
+	position: absolute;
+
+	@if $position == 'vertical' {
+		top: 50%;
+		transform: translateY(-50%);
+	} @else if $position == 'horizontal' {
+		left: 50%;
+		transform: translate(-50%);
+	} @else if $position == 'both' {
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+	}
+}
+
+// Children centering
+@mixin centering {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+// Child block stretching
+@mixin absolute-stretch($position: absolute) {
+	position: $position;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+}
+
+// Hover, focus
+@mixin hocus {
+	&:hover,
+	&:focus {
+		@content;
+	}
+}
+

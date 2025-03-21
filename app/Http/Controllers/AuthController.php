@@ -33,16 +33,15 @@ class AuthController extends Controller
             $request->session()->regenerate();
 
             return response()->json([
-                "success" => true,
-                "errors" => [],
-                "user" => Auth::user()
+                "meta" => [ "success" => true, "errors" => [] ],
+                "data" => [ "user" => Auth::user() ]
             ], 200);
 
         } catch(Exception $e) {
 
             return response()->json([
-                "success" => false,
-                "errors" => ["Ошибка регистрации."]
+                "meta" => [ "success" => false, "errors" => ["Ошибка регистрации"] ],
+                "data" => []
             ], 400);
 
         }
@@ -61,16 +60,15 @@ class AuthController extends Controller
             $request->session()->regenerate();
 
             return response()->json([
-                "success" => true,
-                "errors" => [],
-                "user" => Auth::user()
+                "meta" => [ "success" => true, "errors" => [] ],
+                "data" => [ "user" => Auth::user() ]
             ], 200);
 
         } else {
 
             return response()->json([
-                "success" => false,
-                "errors" => ["Пароль или логин неверный."]
+                "meta" => [ "success" => false, "errors" => ["Пароль или логин неверный"] ],
+                "data" => []
             ], 400);
 
         }
@@ -87,15 +85,15 @@ class AuthController extends Controller
             $request->session()->regenerateToken();
 
             return response()->json([
-                "success" => true,
-                "errors" => []
+                "meta" => [ "success" => true, "errors" => [] ],
+                "data" => []
             ]);
 
         } catch(Exception $e) {
 
             return response()->json([
-                "success" => false,
-                "errors" => ["Ошибка логаута."]
+                "meta" => [ "success" => true, "errors" => ["Ошибка логаута"] ],
+                "data" => []
             ]);
 
         }
@@ -103,7 +101,23 @@ class AuthController extends Controller
     }
 
     public function check(Request $request) {
-        return Auth::check();
+
+        try {
+
+            return response()->json([
+                "meta" => [ "success" => true, "errors" => [] ],
+                "data" => [ "is_authorized" => !!Auth::check() ]
+            ], 200);
+
+        } catch (Exception $e) {
+
+            return response()->json([
+                "meta" => [ "success" => true, "errors" => [$e] ],
+                "data" => []
+            ], 200);
+
+        }
+
     }
 
 }

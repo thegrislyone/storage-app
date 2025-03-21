@@ -140,4 +140,21 @@ function switchForms() :void {
 
 <style lang="scss">
 
+.app-authorization {
+
+    &__form-headline {
+        font-size: 32px;
+        line-height: 1em;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    &__fields-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-gap: 28px;
+    }
+
+}
+
 </style>

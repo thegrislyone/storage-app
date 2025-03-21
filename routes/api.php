@@ -3,8 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\UploadController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\FilesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,7 +17,10 @@ use App\Http\Controllers\AuthController;
 |
 */
 
-Route::post('/upload', [UploadController::class, 'uploadFiles']);
+/* files */
+
+Route::post('/files/upload', [FilesController::class, 'uploadFiles']);
+Route::get('/files/get', [FilesController::class, 'getFilesList'])->middleware('auth');
 
 /* auth */
 

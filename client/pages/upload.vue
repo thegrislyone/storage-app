@@ -1,5 +1,17 @@
 <script lang="ts" setup>
 
+// imports
+
+import FileUpload from '~/components/ui/FileUpload.vue';
+
+// meta
+
+definePageMeta({
+    middleware: ['auth']
+});
+
+// methods
+
 function fileUploaded(e: Event) :void {
 
     const input = <HTMLInputElement>e.target;
@@ -40,9 +52,7 @@ function buttonClick() {
 <template>
 <main class="page-index">
 
-    <input type="file" @input="fileUploaded" multiple>
-
-    <button @click="buttonClick">кнопка</button>
+    <FileUpload/>
 
 </main>
 </template>
